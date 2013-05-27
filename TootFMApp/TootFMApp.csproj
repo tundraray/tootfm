@@ -153,8 +153,10 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Icons\app.png" />
     <Content Include="Assets\Icons\map.btn.png" />
     <Content Include="Assets\Icons\map.layer.png" />
+    <Content Include="Assets\Icons\map1.btn.png" />
     <Content Include="Assets\Icons\play.btn.png" />
     <Content Include="Assets\Icons\search.btn.png" />
     <Content Include="Assets\Icons\stop.btn.png" />

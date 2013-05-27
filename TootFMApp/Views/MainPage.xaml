@@ -12,15 +12,16 @@
     xmlns:Custom="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
-    mc:Ignorable="d" Loaded="MainPage_OnLoaded"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    mc:Ignorable="d" Loaded="MainPage_OnLoaded" 
+    FontFamily="{StaticResource PhoneFontFamilyLight}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    Foreground="#000000"
+    Background="{StaticResource PhoneContrastForegroundBrush }"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="#ffffff">
 
         <Popup IsOpen="{Binding IsLoginPopupOpen}">
             <views:LoginView/>
@@ -48,25 +49,28 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:Pivot x:Name="pivotPanel" SelectedIndex="{Binding PivotIndex, Mode=TwoWay}">
+            <phone:Pivot x:Name="pivotPanel" Foreground="#000000"   SelectedIndex="{Binding PivotIndex, Mode=TwoWay}" >
                 <phone:Pivot.TitleTemplate>
                     <DataTemplate>
-                        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,17,0,0">
-                            <TextBlock Text="{Binding DataContext.CurrentLocationName, ElementName=pivotPanel}" FontWeight="Normal" FontFamily="Segoe WP"  Margin="0,-7,0,0" FontSize="40" Foreground="#2bbbed"/>
-                            <TextBlock Text="{Binding CurrentLocationDescription}" FontWeight="Normal" FontFamily="Segoe WP"  FontSize="20"  Margin="0"/>
+                        <StackPanel x:Name="TitlePanel" Grid.Row="0" MinWidth="100"  Margin="0,17,0,0">
+                            <StackPanel.Background>
+                                <ImageBrush ImageSource="/Assets/Icons/app.png" Stretch="None" AlignmentX="Left" AlignmentY="Top"></ImageBrush>
+                            </StackPanel.Background>
+                            <TextBlock Padding="40,5,0,0" Text="{Binding DataContext.CurrentLocationName, ElementName=pivotPanel}" FontWeight="Normal" FontFamily="{StaticResource PhoneFontFamilyLight}"  Margin="0,-7,0,0" FontSize="40" Foreground="#000000"/>
+                            <!--<TextBlock Text="{Binding CurrentLocationDescription}" FontFamily="{StaticResource PhoneFontFamilyLight}"  FontSize="20"  Margin="0"/>-->
                         </StackPanel>
                     </DataTemplate>
                 </phone:Pivot.TitleTemplate>
                 <!--Pivot item one-->
-                <phone:PivotItem Header="now">
+                <phone:PivotItem FontFamily="{StaticResource PhoneFontFamilyLight}" FontSize="11" Header="now">
                     <Grid>
                         <TextBlock Margin="0,50,0,0" FontSize="24" Text="No tracks available" HorizontalAlignment="Center" Visibility="{Binding NoCurrentTracksVisibility,Converter={StaticResource VisToBoolConverter}}"></TextBlock>
-                        <phone:LongListSelector x:Name="NowTracksList" Margin="0,-7,0,2" ItemsSource="{Binding CurrentTracks}" >
+                        <phone:LongListSelector Foreground="#000000" x:Name="NowTracksList" Margin="0,-7,0,2" ItemsSource="{Binding CurrentTracks}" >
                             <phone:LongListSelector.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  Height="80" >
-                                            <Button Width="69" Padding="0" Height="70" BorderThickness="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="{Binding IsPlay, Converter={StaticResource InverseVisToBoolConverter}}" CommandParameter="{Binding}" Command="{Binding DataContext.PlayCommand, ElementName=NowTracksList  }">
+                                        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left"  Height="80" >
+                                            <Button  Width="69" Padding="0" Height="70" BorderThickness="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="{Binding IsPlay, Converter={StaticResource InverseVisToBoolConverter}}" CommandParameter="{Binding}" Command="{Binding DataContext.PlayCommand, ElementName=NowTracksList  }">
                                                 <Button.Background>
                                                     <ImageBrush Stretch="None" ImageSource="/Assets/Icons/play.btn.png"/>
                                                 </Button.Background>
@@ -78,12 +82,12 @@
                                                 </Button.Background>
                                             </Button>
 
-                                            <StackPanel Width="311" Margin="8,-7,0,0">
-                                                <TextBlock Text="{Binding Track.Name}" FontFamily="Segoe WP"  Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="32" />
-                                                <TextBlock Text="{Binding Track.Description}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="20" />
+                                            <StackPanel  Width="311" Margin="8,-7,0,0">
+                                                <TextBlock Text="{Binding Track.Name}" Foreground="#000000"   Margin="10,0"  FontSize="32" />
+                                                <TextBlock Text="{Binding Track.Description}" Foreground="#000000"  Margin="10,-2,10,0"  FontSize="20" />
+
                                             </StackPanel>
                                         </StackPanel>
-
                                     </Grid>
                                 </DataTemplate>
                             </phone:LongListSelector.ItemTemplate>
@@ -92,7 +96,7 @@
                 </phone:PivotItem>
 
                 <!--Pivot item two-->
-                <phone:PivotItem Header="all time">
+                <phone:PivotItem FontFamily="{StaticResource PhoneFontFamilyLight}" Header="all time">
                     <Grid>
                         <TextBlock Margin="0,50,0,0" FontSize="24" Text="No tracks available" HorizontalAlignment="Center" Visibility="{Binding NoGeneralTracksVisibility,Converter={StaticResource VisToBoolConverter}}"></TextBlock>
                         <phone:LongListSelector x:Name="TracksList" Margin="0,-7,0,2" ItemsSource="{Binding GeneralTracks}" >
@@ -112,9 +116,9 @@
                                                 </Button.Background>
                                             </Button>
 
-                                            <StackPanel Width="311" Margin="8,-7,0,0">
-                                                <TextBlock Text="{Binding Track.Name}" FontFamily="Segoe WP"  Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="32" />
-                                                <TextBlock Text="{Binding Track.Description}" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" FontSize="20" />
+                                            <StackPanel  Width="311" Margin="8,-7,0,0">
+                                                <TextBlock Text="{Binding Track.Name}" Foreground="#000000"   Margin="10,0"  FontSize="32" />
+                                                <TextBlock Text="{Binding Track.Description}" Foreground="#000000"  Margin="10,-2,10,0"  FontSize="20" />
                                             </StackPanel>
                                         </StackPanel>
 
@@ -126,7 +130,7 @@
                 </phone:PivotItem>
             </phone:Pivot>
         </Grid>
-        
+
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
             account for the System Tray. Set this to 0 (or remove the margin altogether)
@@ -136,10 +140,10 @@
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
     </Grid>
 
-    <bar:Bindable.ApplicationBar>
-        <bar:BindableApplicationBar
-        IsVisible="{Binding IsBarVisible}"
-        BackgroundColor="#2bbbed">
+    <bar:Bindable.ApplicationBar >
+        <bar:BindableApplicationBar 
+        IsVisible="{Binding IsBarVisible}" BindableOpacity="0.8" Foreground="#000000"
+        BackgroundColor="#FFFFFF">
             <!--<bar:BindableApplicationBar.MenuItemTemplate>
             <DataTemplate>
                 <bar:BindableApplicationBarMenuItem
@@ -148,20 +152,20 @@
                     CommandParameter="{Binding CommandParameter}"/>
             </DataTemplate>
         </bar:BindableApplicationBar.MenuItemTemplate>-->
-            
-            <bar:BindableApplicationBarButton
+
+            <bar:BindableApplicationBarButton 
             Text="Map"
-            IconUri="/Assets/Icons/map.btn.png"
+            IconUri="/Assets/Icons/map1.btn.png"
             Command="{Binding MapCommand}"/>
 
-            <bar:BindableApplicationBarButton
+            <!--<bar:BindableApplicationBarButton
             Text="Search"
             IconUri="/Assets/Icons/search.btn.png"
-            Command="{Binding MapCommand}"/>
+            Command="{Binding MapCommand}"/>-->
         </bar:BindableApplicationBar>
     </bar:Bindable.ApplicationBar>
 
 
-    
+
 
 </phone:PhoneApplicationPage>

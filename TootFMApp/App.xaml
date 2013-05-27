@@ -12,6 +12,12 @@
         <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
         <Converters:BooleanToVisibilityConverter x:Key="VisToBoolConverter" />
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseVisToBoolConverter" />
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="#000000"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#000000"/>
+        </Style>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
