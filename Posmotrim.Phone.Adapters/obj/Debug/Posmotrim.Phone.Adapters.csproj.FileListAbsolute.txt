@@ -1,0 +1,4 @@
+D:\Projects\Github\tootfm\Posmotrim.Phone.Adapters\Bin\Debug\Posmotrim.Phone.Adapters.dll
+D:\Projects\Github\tootfm\Posmotrim.Phone.Adapters\Bin\Debug\Posmotrim.Phone.Adapters.pdb
+D:\Projects\Github\tootfm\Posmotrim.Phone.Adapters\obj\Debug\Posmotrim.Phone.Adapters.dll
+D:\Projects\Github\tootfm\Posmotrim.Phone.Adapters\obj\Debug\Posmotrim.Phone.Adapters.pdb

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
-  <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{dc6ce8a9-c912-4122-bb8e-43bc07c45dd8}" Title="TootFMApp" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="TootFMApp author" Description="Sample description" Publisher="TootFMApp" PublisherID="{1369ab9f-76e8-4f9a-84d3-63d5210e8289}">
+  <DefaultLanguage xmlns="" code="ru" />
+  <App xmlns="" ProductID="{dc6ce8a9-c912-4122-bb8e-43bc07c45dd8}" Title="TootFM" RuntimeType="Silverlight" Version="0.0.0.1" Genre="apps.normal" Author="Mikhail Andreev" Description="Sample description" Publisher="TootFM" PublisherID="{1369ab9f-76e8-4f9a-84d3-63d5210e8289}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -9,9 +9,14 @@
       <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
       <Capability Name="ID_CAP_SENSORS" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_LOCATION" />
+      <Capability Name="ID_CAP_MAP" />
     </Capabilities>
     <Tasks>
-      <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
+      <DefaultTask Name="_default" NavigationPage="Views/MainPage.xaml" />
+      <ExtendedTask Name="BackgroundTask">
+        <BackgroundServiceAgent Specifier="AudioPlayerAgent" Name="TootFM.Agent" Source="TootFM.Agent" Type="TootFM.Agent.AudioPlayer" />
+      </ExtendedTask>
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="TootFMAppToken" TaskName="_default">
@@ -30,8 +35,6 @@
     </Tokens>
     <ScreenResolutions>
       <ScreenResolution Name="ID_RESOLUTION_WVGA" />
-      <ScreenResolution Name="ID_RESOLUTION_WXGA" />
-      <ScreenResolution Name="ID_RESOLUTION_HD720P" />
     </ScreenResolutions>
   </App>
 </Deployment>

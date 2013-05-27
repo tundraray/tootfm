@@ -5,6 +5,7 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Posmotrim.TootFM.Adapters;
 using Posmotrim.TootFM.App.Resources;
 
 namespace Posmotrim.TootFM.App
@@ -218,5 +219,8 @@ namespace Posmotrim.TootFM.App
                 throw;
             }
         }
+
+
+        
     }
 }
