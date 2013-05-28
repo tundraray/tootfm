@@ -18,7 +18,7 @@
     Foreground="#000000"
     Background="{StaticResource PhoneContrastForegroundBrush }"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="True" shell:SystemTray.ForegroundColor="#000000" shell:SystemTray.BackgroundColor="#ffffff">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="#ffffff">
@@ -70,13 +70,13 @@
                                 <DataTemplate>
                                     <Grid>
                                         <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left"  Height="80" >
-                                            <Button  Width="69" Padding="0" Height="70" BorderThickness="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="{Binding IsPlay, Converter={StaticResource InverseVisToBoolConverter}}" CommandParameter="{Binding}" Command="{Binding DataContext.PlayCommand, ElementName=NowTracksList  }">
+                                            <Button  Width="69" Padding="0" Height="70" BorderThickness="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" Visibility="{Binding IsPlay, Converter={StaticResource InverseVisToBoolConverter}}" CommandParameter="{Binding}" Command="{Binding DataContext.PlayCommand, ElementName=NowTracksList  }">
                                                 <Button.Background>
                                                     <ImageBrush Stretch="None" ImageSource="/Assets/Icons/play.btn.png"/>
                                                 </Button.Background>
                                             </Button>
 
-                                            <Button Width="69" Padding="0" Height="70" BorderThickness="0,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0" Visibility="{Binding IsPlay, Converter={StaticResource VisToBoolConverter}}" Command="{Binding DataContext.StopCommand, ElementName=NowTracksList }">
+                                            <Button Width="69" Padding="0" Height="70" BorderThickness="0,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" Visibility="{Binding IsPlay, Converter={StaticResource VisToBoolConverter}}" Command="{Binding DataContext.StopCommand, ElementName=NowTracksList }">
                                                 <Button.Background>
                                                     <ImageBrush Stretch="None" ImageSource="/Assets/Icons/stop.btn.png"/>
                                                 </Button.Background>
@@ -104,13 +104,13 @@
                                 <DataTemplate>
                                     <Grid>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  Height="80" >
-                                            <Button Width="69" Padding="0" Height="70" BorderThickness="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="{Binding IsPlay, Converter={StaticResource InverseVisToBoolConverter}}" CommandParameter="{Binding}" Command="{Binding DataContext.PlayCommand, ElementName=NowTracksList  }">
+                                            <Button Width="69" Padding="0" Height="70" BorderThickness="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" Visibility="{Binding IsPlay, Converter={StaticResource InverseVisToBoolConverter}}" CommandParameter="{Binding}" Command="{Binding DataContext.PlayCommand, ElementName=NowTracksList  }">
                                                 <Button.Background>
                                                     <ImageBrush Stretch="None" ImageSource="/Assets/Icons/play.btn.png"/>
                                                 </Button.Background>
                                             </Button>
 
-                                            <Button Width="69" Padding="0" Height="70" BorderThickness="0,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0" Visibility="{Binding IsPlay, Converter={StaticResource VisToBoolConverter}}" Command="{Binding DataContext.StopCommand, ElementName=NowTracksList }">
+                                            <Button Width="69" Padding="0" Height="70" BorderThickness="0,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" Visibility="{Binding IsPlay, Converter={StaticResource VisToBoolConverter}}" Command="{Binding DataContext.StopCommand, ElementName=NowTracksList }">
                                                 <Button.Background>
                                                     <ImageBrush Stretch="None" ImageSource="/Assets/Icons/stop.btn.png"/>
                                                 </Button.Background>
@@ -142,7 +142,8 @@
 
     <bar:Bindable.ApplicationBar >
         <bar:BindableApplicationBar 
-        IsVisible="{Binding IsBarVisible}" BindableOpacity="0.8" Foreground="#000000"
+        IsVisible="{Binding IsBarVisible}" Mode="Minimized" BindableOpacity="0.8" Foreground="#000000"
+             ForegroundColor="#000000"
         BackgroundColor="#FFFFFF">
             <!--<bar:BindableApplicationBar.MenuItemTemplate>
             <DataTemplate>
@@ -155,7 +156,7 @@
 
             <bar:BindableApplicationBarButton 
             Text="Map"
-            IconUri="/Assets/Icons/map1.btn.png"
+            IconUri="/Assets/Icons/map.btn.png"
             Command="{Binding MapCommand}"/>
 
             <!--<bar:BindableApplicationBarButton

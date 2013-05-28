@@ -75,6 +75,7 @@ namespace Posmotrim.TootFM.App.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<MapViewModel>();
+            SimpleIoc.Default.Register<PlayerViewModel>();
         }
 
         public MainViewModel Main
@@ -100,6 +101,15 @@ namespace Posmotrim.TootFM.App.ViewModel
             get
             {
                 var main = ServiceLocator.Current.GetInstance<MapViewModel>();
+                return main;
+            }
+        }
+
+        public PlayerViewModel Player
+        {
+            get
+            {
+                var main = ServiceLocator.Current.GetInstance<PlayerViewModel>();
                 return main;
             }
         }

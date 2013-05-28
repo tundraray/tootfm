@@ -75,6 +75,7 @@ namespace Posmotrim.Phone.Adapters
 
         private void AttachToEvents()
         {
+            
             WrappedSubject.PositionChanged += WrappedSubjectPositionChanged;
             WrappedSubject.StatusChanged += WrappedSubjectStatusChanged;
         }

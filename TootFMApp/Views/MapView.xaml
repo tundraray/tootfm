@@ -19,7 +19,7 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <maps:Map Hold="OnMapHold" x:Name="Map" ZoomLevel="15"  Center="{Binding MapCenter, Mode=TwoWay}">
+        <maps:Map Hold="OnMapHold" x:Name="Map" ZoomLevel="13"  Center="{Binding MapCenter, Mode=TwoWay}">
           
         </maps:Map>
     </Grid>

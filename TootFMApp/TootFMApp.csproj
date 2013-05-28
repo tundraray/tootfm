@@ -98,6 +98,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MapPushPinDependency.cs" />
     <Compile Include="ViewModel\MapViewModel.cs" />
+    <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -117,6 +118,9 @@
     </Compile>
     <Compile Include="Views\PivotPage1.xaml.cs">
       <DependentUpon>PivotPage1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerView.xaml.cs">
+      <DependentUpon>PlayerView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +144,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -154,12 +162,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Icons\app.png" />
+    <Content Include="Assets\Icons\forward.btn.png" />
     <Content Include="Assets\Icons\map.btn.png" />
     <Content Include="Assets\Icons\map.layer.png" />
     <Content Include="Assets\Icons\map1.btn.png" />
     <Content Include="Assets\Icons\play.btn.png" />
+    <Content Include="Assets\Icons\play1.btn.png" />
+    <Content Include="Assets\Icons\prev.btn.png" />
     <Content Include="Assets\Icons\search.btn.png" />
     <Content Include="Assets\Icons\stop.btn.png" />
+    <Content Include="Assets\Icons\stop1.btn.png" />
     <Content Include="Assets\loginButton.png" />
     <Content Include="ReadMe.Coding4Fun.Toolkit.txt" />
     <Content Include="README_FIRST.txt" />

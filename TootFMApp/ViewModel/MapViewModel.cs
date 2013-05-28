@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Maps.Controls;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Reactive;
+using Posmotrim.Phone.Adapters;
 using Posmotrim.TootFM.PhoneServices.Models;
 using Posmotrim.TootFM.PhoneServices.Services;
 using Posmotrim.TootFM.PhoneServices.Services.Stores;
@@ -26,17 +27,26 @@ namespace Posmotrim.TootFM.App.ViewModel
         private ISettingsStore _settingsStore;
         private readonly ILocationService _locationService;
         private Func<ITootFMServiceClient> _serviceClient;
+        private IGeoCoordinateWatcher _geoCoordinateWatcher;
         #endregion
         public MapViewModel(ISettingsStore settingsStore, ILocationService locationService,
-                             ITootFMServiceClient serviceClient)
+                             ITootFMServiceClient serviceClient, IGeoCoordinateWatcher geoCoordinateWatcher)
         {
-           
+            this._locationService = locationService;
+            _geoCoordinateWatcher = geoCoordinateWatcher;
+            _geoCoordinateWatcher.PositionChanged += geoCoordinateWatcher_PositionChanged;
+
+            _locationService.StartWatcher();
             _serviceClient = () => serviceClient;
             _settingsStore = settingsStore;
-            this._locationService = locationService;
           
             MapCenter = this._locationService.TryToGetCurrentLocation();
            
+        }
+
+        private void geoCoordinateWatcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            MapCenter = this._locationService.TryToGetCurrentLocation();
         }
 
         private List<MapLayer> _mapItemsControl = new List<MapLayer>();

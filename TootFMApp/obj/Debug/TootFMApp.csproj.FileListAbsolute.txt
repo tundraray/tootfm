@@ -47,3 +47,4 @@ D:\Projects\Github\tootfm\TootFMApp\obj\Debug\TootFMApp.csproj.GenerateResource.
 D:\Projects\Github\tootfm\TootFMApp\obj\Debug\TootFMApp.dll
 D:\Projects\Github\tootfm\TootFMApp\obj\Debug\TootFMApp.pdb
 D:\Projects\Github\tootfm\TootFMApp\obj\Debug\XapCacheFile.xml
+D:\Projects\Github\tootfm\TootFMApp\obj\Debug\Views\PlayerView.g.cs

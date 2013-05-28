@@ -66,8 +66,7 @@ namespace Posmotrim.TootFM.App.ViewModel
             Messenger.Default.Register<Venue>(this, "ChangeLocation", BindingCheckin);
             _serviceClient = () => serviceClient;
             _settingsStore = settingsStore;
-            this._locationService = locationService;
-            _locationService.StartWatcher();
+            
             this._settingsStore.UserChanged += SettingsStoreUserChanged;
 
             if (SettingAreConfigured)
@@ -409,12 +408,12 @@ namespace Posmotrim.TootFM.App.ViewModel
 
                 ser.WriteObject(ifs, i);
             }
-            
-            
-         
-            //BackgroundAudioPlayer.Instance.Track = new AudioTrack(new Uri(obj.Track.Audio.Preview), obj.Track.Name, obj.Track.Artist.Name, obj.Track.Album, null);
-            
+
+
             BackgroundAudioPlayer.Instance.Play();
+            //BackgroundAudioPlayer.Instance.Track = new AudioTrack(new Uri(obj.Track.Audio.Preview), obj.Track.Name, obj.Track.Artist.Name, obj.Track.Album, null);
+            Messenger.Default.Send(new Uri("/Views/PlayerView.xaml", UriKind.Relative), "NavigationRequest");
+            
         }
 
         void Instance_PlayStateChanged(object sender, EventArgs e)
