@@ -34,20 +34,21 @@ namespace Posmotrim.TootFM.App.ViewModel
         {
             this._locationService = locationService;
             _geoCoordinateWatcher = geoCoordinateWatcher;
-            _geoCoordinateWatcher.PositionChanged += geoCoordinateWatcher_PositionChanged;
 
             _locationService.StartWatcher();
             _serviceClient = () => serviceClient;
             _settingsStore = settingsStore;
-          
+            MapCommand = new RelayCommand(() => { MapCenter = this._locationService.TryToGetCurrentLocation(); });
+            var userLastCheckin =
+                _serviceClient().GetLastCheckin().ObserveOnDispatcher().Catch((Exception exception) => ErrorLastCheckin(exception)).Subscribe(SetPosition);
+
             MapCenter = this._locationService.TryToGetCurrentLocation();
-           
+
+
+
         }
 
-        private void geoCoordinateWatcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
-        {
-            MapCenter = this._locationService.TryToGetCurrentLocation();
-        }
+
 
         private List<MapLayer> _mapItemsControl = new List<MapLayer>();
         public List<MapLayer> MapItemsControl
@@ -56,10 +57,23 @@ namespace Posmotrim.TootFM.App.ViewModel
             set
             {
                 _mapItemsControl = value;
-               
+
             }
         }
 
+        private int zoomLevel=15;
+        public int ZoomLevel
+        {
+            get { return zoomLevel; }
+            set
+            {
+                zoomLevel = value;
+                RaisePropertyChanged("ZoomLevel");
+            }
+        }
+
+        public RelayCommand MapCommand { get; set; }
+        private GeoCoordinate _lastMapCenter;
         private GeoCoordinate _mapCenter;
         public GeoCoordinate MapCenter
         {
@@ -67,7 +81,21 @@ namespace Posmotrim.TootFM.App.ViewModel
             set
             {
                 _mapCenter = value;
-                UpdateMap();
+                try
+                {
+                    if (_lastMapCenter == null || (_mapCenter.GetDistanceTo(_lastMapCenter)) > (156543.04 * Math.Cos(MapCenter.Latitude) / (2 ^ ZoomLevel))*100)
+                    {
+                        UpdateMap();
+                        _lastMapCenter = value;
+                    }
+                }
+                catch
+                {
+                    UpdateMap();
+                    _lastMapCenter = value;
+                }
+
+
                 RaisePropertyChanged("MapCenter");
             }
         }
@@ -81,50 +109,74 @@ namespace Posmotrim.TootFM.App.ViewModel
                 IsSync = true;
                 _serviceClient().ListVenues(null, MapCenter).ObserveOnDispatcher().Subscribe(BindingMaps);
             }
-              
+
         }
+
+        private int maxPoint = 20;
 
         private void BindingMaps(IEnumerable<Venue> venues)
         {
 
             MapItemsControl.Clear();
-            foreach (var venue in venues)
+            if(ZoomLevel<11)
+                return;
+            
+            var userLocation = venues.Where(v => v.IsUser).ToList();
+            var location = (from _venue in venues.Where(v => !v.IsUser)
+            let temp = MapCenter.GetDistanceTo(new GeoCoordinate(_venue.Lat,_venue.Lng)) % (156543.04* Math.Cos(MapCenter.Latitude)/(2^ZoomLevel))
+                            orderby temp descending
+                            select _venue).Take(maxPoint - userLocation.Count() <= 0 ? 1 : maxPoint - userLocation.Count());
+            userLocation.AddRange(location);
+
+            foreach (var venue in userLocation)
             {
                 var layer = new MapLayer();
                 var canvas = new Button()
                                  {
-                                     BorderThickness = new Thickness(0,0,0,0),
+                                     BorderThickness = new Thickness(0, 0, 0, 0),
                                      Width = 65,
                                      Height = 97,
                                      Background =
                                          new ImageBrush()
                                              {
                                                  ImageSource =
-                                                     new BitmapImage(new Uri(
-                                                                         "/Assets/Icons/map.layer.png",
+                                                     new BitmapImage(new Uri(string.Format("/Assets/Icons/map{0}.layer.png", venue.IsUser ? "" : ".othere"),
                                                                          UriKind.Relative))
                                              },
-                                             Command = new RelayCommand(() =>
-                                                                            {
-                                                                                Messenger.Default.Send(venue, "ChangeLocation");
-                                                                                Messenger.Default.Send(new Uri("/GoBack.xaml", UriKind.Relative), "NavigationRequest");
-                                                                            })
+                                     Command = new RelayCommand(() =>
+                                                                    {
+                                                                        Messenger.Default.Send(venue, "ChangeLocation");
+                                                                        Messenger.Default.Send(new Uri("/GoBack.xaml", UriKind.Relative), "NavigationRequest");
+                                                                    })
                                  };
 
-               layer.Add(new MapOverlay()
-                                            {
-                                                Content = canvas,
-                                                GeoCoordinate = new GeoCoordinate(venue.Lat, venue.Lng)
-                                            });
+                layer.Add(new MapOverlay()
+                                             {
+                                                 Content = canvas,
+                                                 GeoCoordinate = new GeoCoordinate(venue.Lat, venue.Lng)
+                                             });
 
                 MapItemsControl.Add(layer);
             }
             Messenger.Default.Send<bool>(true, "MapUpdate");
-            
+
             IsSync = false;
 
         }
 
-        
+
+
+        public IObservable<Venue> ErrorLastCheckin(Exception second)
+        {
+            return Observable.Return<Venue>(null);
+        }
+
+        private void SetPosition(Venue venue)
+        {
+            if (venue != null)
+            {
+                MapCenter = new GeoCoordinate(venue.Lat, venue.Lng);
+            }
+        }
     }
 }

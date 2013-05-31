@@ -59,6 +59,7 @@ namespace Posmotrim.TootFM.App.ViewModel
         {
             BackgroundAudioPlayer.Instance.PlayStateChanged += Instance_PlayStateChanged;
             StartSyncCommand = new RelayCommand(StartSync, () => !this.IsSynchronizing && !this.SettingAreNotConfigured);
+          
             StopCommand = new RelayCommand(Stop);
             PlayCommand = new RelayCommand<ObsTrack>(Play);
             MapCommand = new RelayCommand(Map);
@@ -66,7 +67,7 @@ namespace Posmotrim.TootFM.App.ViewModel
             Messenger.Default.Register<Venue>(this, "ChangeLocation", BindingCheckin);
             _serviceClient = () => serviceClient;
             _settingsStore = settingsStore;
-            
+            ExitCommand = new RelayCommand(() => _settingsStore.CurrentSessionToken = null );
             this._settingsStore.UserChanged += SettingsStoreUserChanged;
 
             if (SettingAreConfigured)
@@ -85,8 +86,9 @@ namespace Posmotrim.TootFM.App.ViewModel
 
         private void SettingsStoreUserChanged(object sender, EventArgs e)
         {
-            IsLoginPopupOpen = false;
-            Refresh();
+            IsLoginPopupOpen = !SettingAreConfigured;
+            if (SettingAreConfigured)
+                Refresh();
         }
 
         #region Properties
@@ -472,7 +474,7 @@ namespace Posmotrim.TootFM.App.ViewModel
 
         public RelayCommand<ObsTrack> PlayCommand { get; set; }
         public RelayCommand StopCommand { get; set; }
-
+        public RelayCommand ExitCommand { get; set; }
 
         public RelayCommand MapCommand { get; set; }
 

@@ -14,6 +14,8 @@ namespace Posmotrim.TootFM.PhoneServices.Models
          [DataMember(Name = "name")]
         public string Name { get; set; }
         public VenueLocation Location { get; set; }
+
+        public bool IsUser { get; set; }
     }
 
     [DataContract]

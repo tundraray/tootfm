@@ -1,0 +1,4 @@
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\Posmotrim.TootFM.Common.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\Posmotrim.TootFM.Common.pdb
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\obj\Release\Posmotrim.TootFM.Common.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\obj\Release\Posmotrim.TootFM.Common.pdb

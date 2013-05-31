@@ -1,0 +1,12 @@
+D:\Projects\Github\tootfm\TootFM.Agent\Bin\Release\TootFM.Agent.dll
+D:\Projects\Github\tootfm\TootFM.Agent\Bin\Release\TootFM.Agent.pdb
+D:\Projects\Github\tootfm\TootFM.Agent\Bin\Release\Posmotrim.TootFM.Services.dll
+D:\Projects\Github\tootfm\TootFM.Agent\Bin\Release\GalaSoft.MvvmLight.WP8.dll
+D:\Projects\Github\tootfm\TootFM.Agent\Bin\Release\Posmotrim.Phone.Adapters.dll
+D:\Projects\Github\tootfm\TootFM.Agent\Bin\Release\Posmotrim.TootFM.Services.pdb
+D:\Projects\Github\tootfm\TootFM.Agent\Bin\Release\GalaSoft.MvvmLight.WP8.pdb
+D:\Projects\Github\tootfm\TootFM.Agent\Bin\Release\GalaSoft.MvvmLight.WP8.xml
+D:\Projects\Github\tootfm\TootFM.Agent\Bin\Release\Posmotrim.Phone.Adapters.pdb
+D:\Projects\Github\tootfm\TootFM.Agent\obj\Release\TootFM.Agent.csprojResolveAssemblyReference.cache
+D:\Projects\Github\tootfm\TootFM.Agent\obj\Release\TootFM.Agent.dll
+D:\Projects\Github\tootfm\TootFM.Agent\obj\Release\TootFM.Agent.pdb

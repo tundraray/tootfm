@@ -1,0 +1,11 @@
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Release\Posmotrim.TootFM.Services.dll
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Release\Posmotrim.TootFM.Services.pdb
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Release\GalaSoft.MvvmLight.WP8.dll
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Release\Posmotrim.Phone.Adapters.dll
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Release\System.Threading.Tasks.WP71.dll
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Release\Posmotrim.Phone.Adapters.pdb
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Release\GalaSoft.MvvmLight.WP8.pdb
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Release\GalaSoft.MvvmLight.WP8.xml
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\obj\Release\Posmotrim.TootFM.Services.csprojResolveAssemblyReference.cache
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\obj\Release\Posmotrim.TootFM.Services.dll
+D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\obj\Release\Posmotrim.TootFM.Services.pdb

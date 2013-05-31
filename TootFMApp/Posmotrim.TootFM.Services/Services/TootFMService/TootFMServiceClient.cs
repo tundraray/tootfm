@@ -104,6 +104,7 @@ namespace Posmotrim.TootFM.PhoneServices.Services.TootFMService
                     foreach (var track in arg.Current)
                     {
                         track.Audio = this.GetTrackDeezer(track.DeezerId).ObserveOnDispatcher().FirstOrDefault();
+                        
                     }
                     return arg.Current;
                 }
@@ -140,7 +141,17 @@ namespace Posmotrim.TootFM.PhoneServices.Services.TootFMService
 
             return
                 httpClient
-                    .GetJson<IEnumerable<Venue>>(new HttpWebRequestAdapter(uri));
+                    .GetJson<IEnumerable<Venue>>(new HttpWebRequestAdapter(uri)).Select(MergeVenue);
+        }
+
+        private IEnumerable<Venue> MergeVenue(IEnumerable<Venue> arg)
+        {
+            var userCheckin = ListUserVenues().ObserveOnDispatcher().FirstOrDefault();
+            foreach (var venue in arg)
+            {
+                venue.IsUser = userCheckin.Any(u => u.Id == venue.Id);
+            }
+            return arg;
         }
 
         public IObservable<IEnumerable<Venue>> ListUserVenues()

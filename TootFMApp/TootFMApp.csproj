@@ -164,7 +164,9 @@
     <Content Include="Assets\Icons\app.png" />
     <Content Include="Assets\Icons\forward.btn.png" />
     <Content Include="Assets\Icons\map.btn.png" />
+    <Content Include="Assets\Icons\map.gps.btn.png" />
     <Content Include="Assets\Icons\map.layer.png" />
+    <Content Include="Assets\Icons\map.othere.layer.png" />
     <Content Include="Assets\Icons\map1.btn.png" />
     <Content Include="Assets\Icons\play.btn.png" />
     <Content Include="Assets\Icons\play1.btn.png" />

@@ -160,9 +160,12 @@ namespace Posmotrim.TootFM.App.ViewModel
             if (BackgroundAudioPlayer.Instance.PlayerState == PlayState.Playing)
             {
                 IsPlay = true;
+                if (_timer != null)
+                    _timer.Dispose();
+                _timer = null;
                 _timer = new Timer(state => Deployment.Current.Dispatcher.BeginInvoke(delegate
                                                                                           {
-                                                                                              this.CurrentPositionSlider = BackgroundAudioPlayer.Instance.Position.TotalSeconds;
+                                                                                              this.CurrentPositionSlider = (int)BackgroundAudioPlayer.Instance.Position.TotalSeconds;
                                                                                               CurrentPosition = (BackgroundAudioPlayer.Instance.Position).ToString("mm\\:ss");
                                                                                           }), null, new TimeSpan(0, 0, 0, 0), new TimeSpan(0, 0, 0, 1));
             }

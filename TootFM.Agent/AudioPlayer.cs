@@ -56,7 +56,7 @@ namespace TootFM.Agent
                     var ser = new DataContractJsonSerializer(typeof(List<Track>));
                     var o = ser.ReadObject(ifs);
                     _audioTracks = ((List<Track>)o).Select(
-                        t => new AudioTrack(new Uri(t.Audio.Preview), t.Name, t.Artist.Name, t.Album, string.IsNullOrEmpty(t.Audio.Artist.Picture) ? new Uri(t.Audio.Album.Picture) : new Uri(t.Audio.Artist.Picture))).ToList();
+                        t => new AudioTrack(new Uri(t.Audio.Preview), t.Name, t.Artist.Name, t.Album, string.IsNullOrEmpty(t.Audio.Artist.Picture) ? new Uri(string.Format("{0}?size=big", t.Audio.Album.Picture)) : new Uri(string.Format("{0}?size=big", t.Audio.Artist.Picture)))).ToList();
                 }
 
                 return _audioTracks;

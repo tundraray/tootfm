@@ -130,7 +130,11 @@ namespace Posmotrim.TootFM.PhoneServices.Services.Stores
             set
             {
                 this.AddOrUpdateValue(CurrentSessionSettingKeyName, value);
-
+                var handler = this.UserChanged;
+                if (handler != null)
+                {
+                    UserChanged(this, null);
+                }
             }
         }
 

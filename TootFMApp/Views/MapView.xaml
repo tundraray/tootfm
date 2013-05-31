@@ -10,6 +10,7 @@
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:viewModel="clr-namespace:Posmotrim.TootFM.App.ViewModel"
     xmlns:maptk="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -19,9 +20,27 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <maps:Map Hold="OnMapHold" x:Name="Map" ZoomLevel="13"  Center="{Binding MapCenter, Mode=TwoWay}">
+        <maps:Map Hold="OnMapHold" x:Name="Map" ZoomLevel="{Binding ZoomLevel}"  Center="{Binding MapCenter, Mode=TwoWay}">
           
         </maps:Map>
     </Grid>
+
+    <bar:Bindable.ApplicationBar >
+        <bar:BindableApplicationBar 
+        IsVisible="True" Mode="Minimized" BindableOpacity="0.8" Foreground="#000000"
+             ForegroundColor="#000000"
+        BackgroundColor="#FFFFFF">
+          
+
+            <bar:BindableApplicationBarButton 
+            Text="Map"
+            IconUri="/Assets/Icons/map.gps.btn.png"
+            Command="{Binding MapCommand}"/>
+            <!--<bar:BindableApplicationBarButton
+            Text="Search"
+            IconUri="/Assets/Icons/search.btn.png"
+            Command="{Binding MapCommand}"/>-->
+        </bar:BindableApplicationBar>
+    </bar:Bindable.ApplicationBar>
 
 </phone:PhoneApplicationPage>

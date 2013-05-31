@@ -18,7 +18,7 @@
     Foreground="#000000"
     Background="{StaticResource PhoneContrastForegroundBrush }"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" shell:SystemTray.ForegroundColor="#000000" shell:SystemTray.BackgroundColor="#ffffff">
+    shell:SystemTray.IsVisible="False" shell:SystemTray.ForegroundColor="#000000" shell:SystemTray.BackgroundColor="#ffffff">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="#ffffff">
@@ -141,24 +141,20 @@
     </Grid>
 
     <bar:Bindable.ApplicationBar >
+        
         <bar:BindableApplicationBar 
         IsVisible="{Binding IsBarVisible}" Mode="Minimized" BindableOpacity="0.8" Foreground="#000000"
              ForegroundColor="#000000"
-        BackgroundColor="#FFFFFF">
-            <!--<bar:BindableApplicationBar.MenuItemTemplate>
-            <DataTemplate>
-                <bar:BindableApplicationBarMenuItem
-                    Text="{Binding Text}"
-                    Command="{Binding Command}"
-                    CommandParameter="{Binding CommandParameter}"/>
-            </DataTemplate>
-        </bar:BindableApplicationBar.MenuItemTemplate>-->
+        BackgroundColor="#FFFFFF" >
+            <bar:BindableApplicationBar.MenuItems>
+                <bar:BindableApplicationBarMenuItem Text="disconnect" Command="{Binding ExitCommand}" />
+            </bar:BindableApplicationBar.MenuItems>
 
             <bar:BindableApplicationBarButton 
             Text="Map"
             IconUri="/Assets/Icons/map.btn.png"
             Command="{Binding MapCommand}"/>
-
+          
             <!--<bar:BindableApplicationBarButton
             Text="Search"
             IconUri="/Assets/Icons/search.btn.png"

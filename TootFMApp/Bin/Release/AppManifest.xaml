@@ -1,0 +1,19 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="TootFMApp" EntryPointType="Posmotrim.TootFM.App.App" RuntimeVersion="4.7.50308.0">
+  <Deployment.Parts>
+    <AssemblyPart x:Name="TootFMApp" Source="TootFMApp.dll" />
+    <AssemblyPart x:Name="BindableApplicationBar" Source="BindableApplicationBar.dll" />
+    <AssemblyPart x:Name="Coding4Fun.Toolkit.Audio" Source="Coding4Fun.Toolkit.Audio.dll" />
+    <AssemblyPart x:Name="Coding4Fun.Toolkit.Controls" Source="Coding4Fun.Toolkit.Controls.dll" />
+    <AssemblyPart x:Name="GalaSoft.MvvmLight.Extras.WP8" Source="GalaSoft.MvvmLight.Extras.WP8.dll" />
+    <AssemblyPart x:Name="GalaSoft.MvvmLight.WP8" Source="GalaSoft.MvvmLight.WP8.dll" />
+    <AssemblyPart x:Name="Microsoft.Phone.Controls" Source="Microsoft.Phone.Controls.dll" />
+    <AssemblyPart x:Name="Microsoft.Phone.Controls.Toolkit" Source="Microsoft.Phone.Controls.Toolkit.dll" />
+    <AssemblyPart x:Name="Microsoft.Practices.ServiceLocation" Source="Microsoft.Practices.ServiceLocation.dll" />
+    <AssemblyPart x:Name="Posmotrim.Phone.Adapters" Source="Posmotrim.Phone.Adapters.dll" />
+    <AssemblyPart x:Name="Posmotrim.TootFM.Adapters" Source="Posmotrim.TootFM.Adapters.dll" />
+    <AssemblyPart x:Name="Posmotrim.TootFM.Common" Source="Posmotrim.TootFM.Common.dll" />
+    <AssemblyPart x:Name="Posmotrim.TootFM.Services" Source="Posmotrim.TootFM.Services.dll" />
+    <AssemblyPart x:Name="System.Windows.Interactivity" Source="System.Windows.Interactivity.dll" />
+    <AssemblyPart x:Name="TootFM.Agent" Source="TootFM.Agent.dll" />
+  </Deployment.Parts>
+</Deployment>

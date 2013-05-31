@@ -14,7 +14,11 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="False">
-
+    <phone:PhoneApplicationPage.Resources>
+        <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="Button">
+            <Border  Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" x:Name="Border" Background="{TemplateBinding Background}"/>
+        </ControlTemplate>
+    </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Height="800" >
         <Grid.Background>
@@ -25,7 +29,7 @@
                 <Common:WebBrowserUtility.ShouldHandleNavigated>True</Common:WebBrowserUtility.ShouldHandleNavigated>
             </phone:WebBrowser>
 
-            <Button  Width="432" Height="119" Margin="24,500,24,0" Command="{Binding ClickCommand}">
+            <Button Template="{StaticResource ButtonControlTemplate1}"  Width="432" Height="119" Margin="24,500,24,0" Command="{Binding ClickCommand}">
                 <Button.Background>
                     <ImageBrush Stretch="None" ImageSource="/Assets/loginButton.png"/>
                 </Button.Background>
