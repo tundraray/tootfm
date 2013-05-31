@@ -15,6 +15,7 @@ namespace Posmotrim.TootFM.App.Views
         public LoginView()
         {
             InitializeComponent();
+            this.AuthenticationBrowser.ClearCookiesAsync();
         }
     }
 }

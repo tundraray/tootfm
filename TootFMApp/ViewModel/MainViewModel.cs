@@ -69,7 +69,7 @@ namespace Posmotrim.TootFM.App.ViewModel
             _settingsStore = settingsStore;
             ExitCommand = new RelayCommand(() => _settingsStore.CurrentSessionToken = null );
             this._settingsStore.UserChanged += SettingsStoreUserChanged;
-
+            locationService.StartWatcher();
             if (SettingAreConfigured)
             {
                 Refresh();
@@ -355,13 +355,13 @@ namespace Posmotrim.TootFM.App.ViewModel
         private void BindingCurrentTrack(IEnumerable<Track> checkin)
         {
 
-            CurrentTracks = checkin.Select(s=>new ObsTrack { IsPlay = false,Track = s}).ToList();
+            CurrentTracks = checkin.Where(c=>c.Audio != null).Select(s=>new ObsTrack { IsPlay = false,Track = s}).ToList();
             NoCurrentTracksVisibility = !CurrentTracks.Any();
         }
 
         private void BindingGeneralTrack(IEnumerable<Track> checkin)
         {
-            GeneralTracks = checkin.Select(s => new ObsTrack { IsPlay = false, Track = s }).ToList();
+            GeneralTracks = checkin.Where(c => c.Audio != null).Select(s => new ObsTrack { IsPlay = false, Track = s }).ToList();
             NoGeneralTracksVisibility = !GeneralTracks.Any();
         }
 

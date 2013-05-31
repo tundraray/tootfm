@@ -35,7 +35,7 @@ namespace Posmotrim.TootFM.App.ViewModel
             this._locationService = locationService;
             _geoCoordinateWatcher = geoCoordinateWatcher;
 
-            _locationService.StartWatcher();
+            //_locationService.StartWatcher();
             _serviceClient = () => serviceClient;
             _settingsStore = settingsStore;
             MapCommand = new RelayCommand(() => { MapCenter = this._locationService.TryToGetCurrentLocation(); });

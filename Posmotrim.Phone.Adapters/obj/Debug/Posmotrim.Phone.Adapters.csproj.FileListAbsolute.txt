@@ -2,3 +2,7 @@ D:\Projects\Github\tootfm\Posmotrim.Phone.Adapters\Bin\Debug\Posmotrim.Phone.Ada
 D:\Projects\Github\tootfm\Posmotrim.Phone.Adapters\Bin\Debug\Posmotrim.Phone.Adapters.pdb
 D:\Projects\Github\tootfm\Posmotrim.Phone.Adapters\obj\Debug\Posmotrim.Phone.Adapters.dll
 D:\Projects\Github\tootfm\Posmotrim.Phone.Adapters\obj\Debug\Posmotrim.Phone.Adapters.pdb
+C:\Users\m.andreev\Documents\tootfm\Posmotrim.Phone.Adapters\Bin\Debug\Posmotrim.Phone.Adapters.dll
+C:\Users\m.andreev\Documents\tootfm\Posmotrim.Phone.Adapters\Bin\Debug\Posmotrim.Phone.Adapters.pdb
+C:\Users\m.andreev\Documents\tootfm\Posmotrim.Phone.Adapters\obj\Debug\Posmotrim.Phone.Adapters.dll
+C:\Users\m.andreev\Documents\tootfm\Posmotrim.Phone.Adapters\obj\Debug\Posmotrim.Phone.Adapters.pdb

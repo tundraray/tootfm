@@ -16,6 +16,7 @@ using Posmotrim.TootFM.Adapters;
 using Posmotrim.TootFM.PhoneServices.Models;
 using Posmotrim.TootFM.PhoneServices.Services.Stores;
 using Posmotrim.TootFM.PhoneServices.Services.TootFMService;
+using Microsoft.Phone.Controls;
 
 namespace Posmotrim.TootFM.App.ViewModel
 {
@@ -69,7 +70,7 @@ namespace Posmotrim.TootFM.App.ViewModel
                     MessageBox.Show(error, "Error", MessageBoxButton.OK);
                     return;
                 }
-
+                
                 var token = _queryString.Where(x => x.Key == "access_token").First().Value;
                 _serviceClient().GetFoursqareAuth(HttpUtility.UrlDecode(token)).Catch(
                     (Exception exception) =>

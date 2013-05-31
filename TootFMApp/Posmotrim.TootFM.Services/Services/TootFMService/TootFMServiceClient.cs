@@ -57,7 +57,7 @@ namespace Posmotrim.TootFM.PhoneServices.Services.TootFMService
 
         private Venue Check(CheckInW arg)
         {
-            if (arg == null && arg.CheckIn == null)
+            if (arg == null || arg.CheckIn == null)
                 return null;
             return arg.CheckIn.Venue;
         }

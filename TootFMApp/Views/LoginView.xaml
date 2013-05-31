@@ -25,7 +25,7 @@
             <ImageBrush Stretch="None" ImageSource="/SplashScreenImage.jpg"/>
         </Grid.Background>
         <StackPanel>
-            <phone:WebBrowser IsScriptEnabled="True" Visibility="{Binding BrowserVisibility,Converter={StaticResource VisToBoolConverter}}" x:Name="AuthenticationBrowser" Margin="0" Width="480" Height="800" Common:WebBrowserUtility.BindableSource="{Binding UrlPage, Mode=TwoWay}"  >
+            <phone:WebBrowser   IsScriptEnabled="True" Visibility="{Binding BrowserVisibility,Converter={StaticResource VisToBoolConverter}}" x:Name="AuthenticationBrowser" Margin="0" Width="480" Height="800" Common:WebBrowserUtility.BindableSource="{Binding UrlPage, Mode=TwoWay}"  >
                 <Common:WebBrowserUtility.ShouldHandleNavigated>True</Common:WebBrowserUtility.ShouldHandleNavigated>
             </phone:WebBrowser>
 

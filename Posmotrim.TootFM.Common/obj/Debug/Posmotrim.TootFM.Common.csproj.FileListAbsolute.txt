@@ -2,3 +2,7 @@ D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Debug\Posmotrim.TootFM.Com
 D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Debug\Posmotrim.TootFM.Common.pdb
 D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\obj\Debug\Posmotrim.TootFM.Common.dll
 D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\obj\Debug\Posmotrim.TootFM.Common.pdb
+C:\Users\m.andreev\Documents\tootfm\Posmotrim.TootFM.Common\Bin\Debug\Posmotrim.TootFM.Common.dll
+C:\Users\m.andreev\Documents\tootfm\Posmotrim.TootFM.Common\Bin\Debug\Posmotrim.TootFM.Common.pdb
+C:\Users\m.andreev\Documents\tootfm\Posmotrim.TootFM.Common\obj\Debug\Posmotrim.TootFM.Common.dll
+C:\Users\m.andreev\Documents\tootfm\Posmotrim.TootFM.Common\obj\Debug\Posmotrim.TootFM.Common.pdb

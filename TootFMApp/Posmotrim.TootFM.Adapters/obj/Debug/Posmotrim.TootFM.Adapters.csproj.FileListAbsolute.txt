@@ -2,3 +2,7 @@ D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Adapters\Bin\Debug\Posmotri
 D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Adapters\Bin\Debug\Posmotrim.TootFM.Adapters.pdb
 D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Adapters\obj\Debug\Posmotrim.TootFM.Adapters.dll
 D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Adapters\obj\Debug\Posmotrim.TootFM.Adapters.pdb
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Adapters\Bin\Debug\Posmotrim.TootFM.Adapters.dll
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Adapters\Bin\Debug\Posmotrim.TootFM.Adapters.pdb
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Adapters\obj\Debug\Posmotrim.TootFM.Adapters.dll
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Adapters\obj\Debug\Posmotrim.TootFM.Adapters.pdb

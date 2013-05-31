@@ -9,3 +9,13 @@ D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Debug\GalaSoft
 D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\obj\Debug\Posmotrim.TootFM.Services.csprojResolveAssemblyReference.cache
 D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\obj\Debug\Posmotrim.TootFM.Services.dll
 D:\Projects\Github\tootfm\TootFMApp\Posmotrim.TootFM.Services\obj\Debug\Posmotrim.TootFM.Services.pdb
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Debug\Posmotrim.TootFM.Services.dll
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Debug\Posmotrim.TootFM.Services.pdb
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Debug\GalaSoft.MvvmLight.WP8.dll
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Debug\Posmotrim.Phone.Adapters.dll
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Debug\Posmotrim.Phone.Adapters.pdb
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Debug\GalaSoft.MvvmLight.WP8.pdb
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Services\Bin\Debug\GalaSoft.MvvmLight.WP8.xml
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Services\obj\Debug\Posmotrim.TootFM.Services.csprojResolveAssemblyReference.cache
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Services\obj\Debug\Posmotrim.TootFM.Services.dll
+C:\Users\m.andreev\Documents\tootfm\TootFMApp\Posmotrim.TootFM.Services\obj\Debug\Posmotrim.TootFM.Services.pdb
