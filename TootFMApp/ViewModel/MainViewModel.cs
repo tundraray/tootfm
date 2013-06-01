@@ -422,27 +422,36 @@ namespace Posmotrim.TootFM.App.ViewModel
         {
             if (BackgroundAudioPlayer.Instance.Track != null)
             {
-                var track = BackgroundAudioPlayer.Instance.Track;
-                if (PivotIndex == 0)
+                try
                 {
-                    var _a = CurrentTracks.FirstOrDefault(a => a.Track.Audio.Preview.Contains(track.Source.ToString()));
-                    foreach (var obsTrack in CurrentTracks)
+                    var track = BackgroundAudioPlayer.Instance.Track;
+                    if (PivotIndex == 0)
                     {
-                        obsTrack.IsPlay = false;
-                        if (_a != null && obsTrack.Track.Id == _a.Track.Id && BackgroundAudioPlayer.Instance.PlayerState != PlayState.Paused)
-                            obsTrack.IsPlay = true;
+                        var _a = CurrentTracks.FirstOrDefault(a => a.Track.Audio.Preview.Contains(track.Source.ToString()));
+                        foreach (var obsTrack in CurrentTracks)
+                        {
+                            obsTrack.IsPlay = false;
+                            if (_a != null && obsTrack.Track.Id == _a.Track.Id && BackgroundAudioPlayer.Instance.PlayerState != PlayState.Paused)
+                                obsTrack.IsPlay = true;
+                        }
+                    }
+                    else
+                    {
+                        var _a = GeneralTracks.FirstOrDefault(a => a.Track.Audio.Preview.Contains(track.Source.ToString()));
+                        foreach (var obsTrack in GeneralTracks)
+                        {
+                            obsTrack.IsPlay = false;
+                            if (_a != null && obsTrack.Track.Id == _a.Track.Id && BackgroundAudioPlayer.Instance.PlayerState != PlayState.Paused)
+                                obsTrack.IsPlay = true;
+                        }
                     }
                 }
-                else
+                catch (Exception)
                 {
-                    var _a = GeneralTracks.FirstOrDefault(a => a.Track.Audio.Preview.Contains(track.Source.ToString()));
-                    foreach (var obsTrack in GeneralTracks)
-                    {
-                        obsTrack.IsPlay = false;
-                        if (_a != null && obsTrack.Track.Id == _a.Track.Id && BackgroundAudioPlayer.Instance.PlayerState != PlayState.Paused)
-                            obsTrack.IsPlay = true;
-                    }
+                    
+                    
                 }
+                
                 
             }
         }

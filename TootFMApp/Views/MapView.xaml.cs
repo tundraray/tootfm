@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Maps.Controls;
 using Microsoft.Phone.Shell;
 using Posmotrim.TootFM.App.ViewModel;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;
@@ -21,15 +22,23 @@ namespace Posmotrim.TootFM.App.Views
            
         }
 
-        private void MapUpdate(bool obj)
+        private void MapUpdate(List<MapLayer> obj)
         {
+
             
-           
-            this.Map.Layers.Clear();
-            foreach (var l in MainViewModel.MapItemsControl)
+            foreach (var l in obj)
             {
-                this.Map.Layers.Add(l);
+                try
+                {
+                    this.Map.Layers.Add(l);
+                }
+                catch 
+                {
+                  
+                }
+                
             }
+            
             
         }
 
@@ -49,14 +58,20 @@ namespace Posmotrim.TootFM.App.Views
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
         {
-            Messenger.Default.Unregister<bool>(this);
+            Map.Layers.Clear();
+            MainViewModel.Clear();
+            Messenger.Default.Unregister<List<MapLayer>>(this);
             Messenger.Default.Unregister<Uri>(this);
             base.OnNavigatedFrom(e);
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            Messenger.Default.Register<bool>(this, "MapUpdate", MapUpdate);
+           // Map.Layers.Clear();
+            MainViewModel.Load();
+           
+            //MainViewModel.MapItemsControlAdd = new List<MapLayer>();
+            Messenger.Default.Register<List<MapLayer>>(this, "MapUpdate", MapUpdate);
             Messenger.Default.Register<Uri>(this, "NavigationRequest", NavigateTo);
             base.OnNavigatedTo(e);
 
@@ -80,6 +95,15 @@ namespace Posmotrim.TootFM.App.Views
         private void OnMapHold(object sender, GestureEventArgs e)
         {
             
+        }
+
+        private void Map_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var map = sender as Map;
+            if (map.Layers.Count == 0 && MainViewModel.MapItemsControl.Count > 0)
+            {
+                MapUpdate(MainViewModel.MapItemsControl);
+            }
         }
     }
 }

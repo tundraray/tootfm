@@ -27,6 +27,21 @@ namespace Posmotrim.TootFM.App.ViewModel
             BackgroundAudioPlayer.Instance.PlayStateChanged += Instance_PlayStateChanged;
             _serviceClient = () => serviceClient;
             _settingsStore = settingsStore;
+            _timer = new Timer(state => Deployment.Current.Dispatcher.BeginInvoke(delegate
+            {
+                if (BackgroundAudioPlayer.Instance.PlayerState == PlayState.Playing)
+                {
+                    IsPlay = true;
+                    CurrentPosition = (BackgroundAudioPlayer.Instance.Position).ToString("mm\\:ss");
+                    TimeSlider = BackgroundAudioPlayer.Instance.Track.Duration.TotalSeconds;
+                }
+                else
+                {
+                    isPlay = false;
+                    CurrentPositionSlider = 0;
+                }
+               
+            }), null, new TimeSpan(0, 0, 0, 0), new TimeSpan(0, 0, 0, 1));
         }
 
         public RelayCommand PrevCommand { get; set; }
@@ -38,7 +53,14 @@ namespace Posmotrim.TootFM.App.ViewModel
         private string _trackName;
         public string TrackName
         {
-            get { return _trackName; }
+            get
+            {
+                if (string.IsNullOrEmpty(_trackName) && BackgroundAudioPlayer.Instance.Track != null)
+                {
+                    _trackName = BackgroundAudioPlayer.Instance.Track.Title;
+                }
+                return _trackName;
+            }
 
             set
             {
@@ -54,7 +76,14 @@ namespace Posmotrim.TootFM.App.ViewModel
         private string _artistName;
         public string ArtistName
         {
-            get { return _artistName; }
+            get
+            {
+                if (string.IsNullOrEmpty(_artistName) && BackgroundAudioPlayer.Instance.Track != null)
+                {
+                    _artistName = BackgroundAudioPlayer.Instance.Track.Artist;
+                }
+                return _artistName;
+            }
 
             set
             {
@@ -133,7 +162,7 @@ namespace Posmotrim.TootFM.App.ViewModel
                 {
                     _currentPosition = value;
 
-                    RaisePropertyChanged("");
+                    RaisePropertyChanged("CurrentPosition");
                 }
             }
         }
@@ -141,7 +170,14 @@ namespace Posmotrim.TootFM.App.ViewModel
         private Uri _picture;
         public Uri Picture
         {
-            get { return _picture; }
+            get
+            {
+                if (_picture == null && BackgroundAudioPlayer.Instance.Track != null)
+                {
+                    Picture = BackgroundAudioPlayer.Instance.Track.AlbumArt;
+                }
+                return _picture;
+            }
 
             set
             {
@@ -157,31 +193,13 @@ namespace Posmotrim.TootFM.App.ViewModel
         void Instance_PlayStateChanged(object sender, EventArgs e)
         {
             IsPlay = false;
-            if (BackgroundAudioPlayer.Instance.PlayerState == PlayState.Playing)
-            {
-                IsPlay = true;
-                if (_timer != null)
-                    _timer.Dispose();
-                _timer = null;
-                _timer = new Timer(state => Deployment.Current.Dispatcher.BeginInvoke(delegate
-                                                                                          {
-                                                                                              this.CurrentPositionSlider = (int)BackgroundAudioPlayer.Instance.Position.TotalSeconds;
-                                                                                              CurrentPosition = (BackgroundAudioPlayer.Instance.Position).ToString("mm\\:ss");
-                                                                                          }), null, new TimeSpan(0, 0, 0, 0), new TimeSpan(0, 0, 0, 1));
-            }
-            else if (BackgroundAudioPlayer.Instance.PlayerState == PlayState.Paused)
-            {
-               
-                if (_timer != null)
-                    _timer.Dispose();
-                _timer = null;
-            }
+           
             if (BackgroundAudioPlayer.Instance.Track != null)
             {
                 ArtistName = BackgroundAudioPlayer.Instance.Track.Artist;
                 TrackName = BackgroundAudioPlayer.Instance.Track.Title;
                 Picture = BackgroundAudioPlayer.Instance.Track.AlbumArt;
-                this.TimeSlider = BackgroundAudioPlayer.Instance.Track.Duration.TotalSeconds;
+                TimeSlider = BackgroundAudioPlayer.Instance.Track.Duration.TotalSeconds;
                 Time = (BackgroundAudioPlayer.Instance.Track.Duration).ToString("mm\\:ss");
 
             }

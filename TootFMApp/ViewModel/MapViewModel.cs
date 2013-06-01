@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -39,51 +40,60 @@ namespace Posmotrim.TootFM.App.ViewModel
             _serviceClient = () => serviceClient;
             _settingsStore = settingsStore;
             MapCommand = new RelayCommand(() => { MapCenter = this._locationService.TryToGetCurrentLocation(); });
-            var userLastCheckin =
-                _serviceClient().GetLastCheckin().ObserveOnDispatcher().Catch((Exception exception) => ErrorLastCheckin(exception)).Subscribe(SetPosition);
-
-            MapCenter = this._locationService.TryToGetCurrentLocation();
-
 
 
         }
 
 
-
+        
         private List<MapLayer> _mapItemsControl = new List<MapLayer>();
         public List<MapLayer> MapItemsControl
         {
-            get { return _mapItemsControl; }
+            get
+            {
+                return _mapItemsControl;
+            }
             set
             {
                 _mapItemsControl = value;
-
+                RaisePropertyChanged("MapItemsControl");
             }
         }
+      
 
-        private int zoomLevel=15;
+        private int zoomLevel = 16;
         public int ZoomLevel
         {
             get { return zoomLevel; }
             set
             {
                 zoomLevel = value;
+                MapItemsControl.Clear();
+                Messenger.Default.Send<bool>(true, "MapUpdate");
                 RaisePropertyChanged("ZoomLevel");
             }
         }
 
         public RelayCommand MapCommand { get; set; }
         private GeoCoordinate _lastMapCenter;
-        private GeoCoordinate _mapCenter;
+        private GeoCoordinate _mapCenter = null;
         public GeoCoordinate MapCenter
         {
-            get { return _mapCenter; }
+            get
+            {
+                if (_mapCenter == null)
+                {
+                    _serviceClient().GetLastCheckin().ObserveOnDispatcher().Catch((Exception exception) => ErrorLastCheckin(exception)).Subscribe(SetPosition);
+                    return _locationService.TryToGetCurrentLocation();
+                }
+                return _mapCenter;
+            }
             set
             {
                 _mapCenter = value;
                 try
                 {
-                    if (_lastMapCenter == null || (_mapCenter.GetDistanceTo(_lastMapCenter)) > (156543.04 * Math.Cos(MapCenter.Latitude) / (2 ^ ZoomLevel))*100)
+                    if (_lastMapCenter == null || (_mapCenter.GetDistanceTo(_lastMapCenter)) > (156543.04 * Math.Cos(MapCenter.Latitude) / (2 ^ ZoomLevel)) * 100)
                     {
                         UpdateMap();
                         _lastMapCenter = value;
@@ -112,23 +122,28 @@ namespace Posmotrim.TootFM.App.ViewModel
 
         }
 
+
+
         private int maxPoint = 20;
 
         private void BindingMaps(IEnumerable<Venue> venues)
         {
 
-            MapItemsControl.Clear();
-            if(ZoomLevel<11)
+            var items =  new List<MapLayer>();
+            //MapItemsControl.Clear();
+            if (ZoomLevel < 11)
                 return;
-            
+
             var userLocation = venues.Where(v => v.IsUser).ToList();
             var location = (from _venue in venues.Where(v => !v.IsUser)
-            let temp = MapCenter.GetDistanceTo(new GeoCoordinate(_venue.Lat,_venue.Lng)) % (156543.04* Math.Cos(MapCenter.Latitude)/(2^ZoomLevel))
+                            let temp = MapCenter.GetDistanceTo(new GeoCoordinate(_venue.Lat, _venue.Lng)) % (156543.04 * Math.Cos(MapCenter.Latitude) / (2 ^ ZoomLevel))
+
+
                             orderby temp descending
                             select _venue).Take(maxPoint - userLocation.Count() <= 0 ? 1 : maxPoint - userLocation.Count());
             userLocation.AddRange(location);
 
-            foreach (var venue in userLocation)
+            foreach (var venue in userLocation.Where(venue => !MapItemsControl.Any(m => m.Any(o => o.GeoCoordinate.Latitude == venue.Lat && o.GeoCoordinate.Longitude == venue.Lng))))
             {
                 var layer = new MapLayer();
                 var canvas = new Button()
@@ -136,6 +151,7 @@ namespace Posmotrim.TootFM.App.ViewModel
                                      BorderThickness = new Thickness(0, 0, 0, 0),
                                      Width = 65,
                                      Height = 97,
+                                     
                                      Background =
                                          new ImageBrush()
                                              {
@@ -152,13 +168,17 @@ namespace Posmotrim.TootFM.App.ViewModel
 
                 layer.Add(new MapOverlay()
                                              {
+                                                 PositionOrigin = new Point(0.5,0.5),
                                                  Content = canvas,
                                                  GeoCoordinate = new GeoCoordinate(venue.Lat, venue.Lng)
                                              });
 
-                MapItemsControl.Add(layer);
+                items.Add(layer);
             }
-            Messenger.Default.Send<bool>(true, "MapUpdate");
+           
+            MapItemsControl.AddRange(items);
+
+            Messenger.Default.Send(items, "MapUpdate");
 
             IsSync = false;
 
@@ -175,8 +195,22 @@ namespace Posmotrim.TootFM.App.ViewModel
         {
             if (venue != null)
             {
+                _lastMapCenter = GeoCoordinate.Unknown;
                 MapCenter = new GeoCoordinate(venue.Lat, venue.Lng);
+
             }
+        }
+
+        public void Clear()
+        {
+           _mapItemsControl  = new List<MapLayer>();
+            _mapCenter = null;
+        }
+
+        public void Load()
+        {
+            _mapItemsControl  = new List<MapLayer>();
+            _mapCenter = null;
         }
     }
 }

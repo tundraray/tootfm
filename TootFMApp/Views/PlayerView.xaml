@@ -7,6 +7,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     FontFamily="{StaticResource PhoneFontFamilyLight}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="#000000"
@@ -68,7 +69,13 @@
             
             <StackPanel Grid.Row="2" Margin="0,20,0,0" Orientation="Horizontal">
                 <TextBlock Width="47" Margin="7,10,0,0" Text="{Binding CurrentPosition}" Foreground="#000000"     FontSize="20" />
-                <Slider Width="337" IsEnabled="False" Value="{Binding CurrentPositionSlider}" Maximum="{Binding TimeSlider}" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="0"  />
+
+                <c4f:SuperSlider  x:Name="slider"
+						StepFrequency="1"
+						BarHeight="12"  Width="337" 
+						Value="{Binding CurrentPositionSlider}" Minimum="0" Maximum="30"
+						 VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="5,15" />
+               
                 <TextBlock Width="60" Margin="0,10,0,0" Text="{Binding Time}" Foreground="#000000"   FontSize="20" />
             </StackPanel>
         </Grid>
