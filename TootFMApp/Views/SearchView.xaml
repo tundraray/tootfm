@@ -1,0 +1,73 @@
+﻿<phone:PhoneApplicationPage
+     DataContext="{Binding Source={StaticResource Locator}, Path=Search}"
+    x:Class="Posmotrim.TootFM.App.Views.SearchView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+     xmlns:my="clr-namespace:Posmotrim.TootFM.Common;assembly=Posmotrim.TootFM.Common"
+     xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+     FontFamily="{StaticResource PhoneFontFamilyLight}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="#000000"
+    Background="{StaticResource PhoneContrastForegroundBrush }"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" >
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#ffffff" Height="800" Width="480">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="NEARBY VENUE"  />
+            <TextBox BorderThickness="1,2" InputScope="Search" KeyDown="UIElement_OnKeyDown"  Text="{Binding SearchVenue, Mode=TwoWay}" BorderBrush="Black">
+                
+               
+            </TextBox>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <phone:LongListSelector Foreground="#000000" x:Name="NearbyVenue" Margin="0,-7,0,2" ItemsSource="{Binding Venues}" >
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left"  Height="80" >
+                                <Canvas  Width="69" Height="70" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" Visibility="{Binding IsUser, Converter={StaticResource InverseVisToBoolConverter}}">
+                                    <Canvas.Background>
+                                        <ImageBrush Stretch="Uniform" ImageSource="/Assets/Icons/map.othere.layer.png"/>
+                                    </Canvas.Background>
+                                </Canvas>
+
+                                <Canvas Width="69"  Height="70"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" Visibility="{Binding IsUser, Converter={StaticResource VisToBoolConverter}}" >
+                                    <Canvas.Background>
+                                        <ImageBrush Stretch="Uniform" ImageSource="/Assets/Icons/map.layer.png"/>
+                                    </Canvas.Background>
+                                </Canvas>
+
+                                <StackPanel   Margin="8,10,0,0">
+                                    <TextBlock Text="{Binding Name}" Foreground="#000000"   Margin="10,0"  FontSize="32" />
+                                    
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Tap">
+                        <command:EventToCommand Command="{Binding SelectedCommand, Mode=OneWay}" CommandParameter="{Binding Path=SelectedItem, ElementName=NearbyVenue}" PassEventArgsToCommand="False"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </phone:LongListSelector>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

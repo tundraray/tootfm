@@ -51,9 +51,13 @@ namespace Posmotrim.TootFM.App.Views
         public void NavigateTo(Uri uri)
         {
             if (uri.ToString() == "/GoBack.xaml")
-                NavigationService.GoBack();
+            {
+                if (NavigationService.CanGoBack)
+                    NavigationService.GoBack();
+            }
             else
                 NavigationService.Navigate(uri);
+        
         }
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)

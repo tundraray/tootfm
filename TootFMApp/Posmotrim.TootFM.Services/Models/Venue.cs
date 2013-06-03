@@ -24,4 +24,5 @@ namespace Posmotrim.TootFM.PhoneServices.Models
         [DataMember(Name = "address")]
         public string Address { get; set; }
     }
+
 }

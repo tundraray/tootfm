@@ -15,12 +15,9 @@
 using System;
 using System.ComponentModel;
 using System.Device.Location;
-using System.Windows;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Posmotrim.Phone.Adapters;
-using Posmotrim.TootFM.Adapters;
 using Posmotrim.TootFM.PhoneServices.Services;
 using Posmotrim.TootFM.PhoneServices.Services.Clients;
 using Posmotrim.TootFM.PhoneServices.Services.Stores;
@@ -76,6 +73,7 @@ namespace Posmotrim.TootFM.App.ViewModel
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<MapViewModel>();
             SimpleIoc.Default.Register<PlayerViewModel>();
+            SimpleIoc.Default.Register<SearchViewModel>();
         }
 
         public MainViewModel Main
@@ -104,6 +102,16 @@ namespace Posmotrim.TootFM.App.ViewModel
                 return main;
             }
         }
+
+        public SearchViewModel Search
+        {
+            get
+            {
+                var main = ServiceLocator.Current.GetInstance<SearchViewModel>();
+                return main;
+            }
+        }
+
 
         public PlayerViewModel Player
         {

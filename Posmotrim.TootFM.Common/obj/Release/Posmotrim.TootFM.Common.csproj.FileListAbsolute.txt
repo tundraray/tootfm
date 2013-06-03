@@ -2,3 +2,15 @@ D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\Posmotrim.TootFM.C
 D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\Posmotrim.TootFM.Common.pdb
 D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\obj\Release\Posmotrim.TootFM.Common.dll
 D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\obj\Release\Posmotrim.TootFM.Common.pdb
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\System.Windows.Interactivity.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\de\System.Windows.Interactivity.resources.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\en\System.Windows.Interactivity.resources.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\es\System.Windows.Interactivity.resources.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\fr\System.Windows.Interactivity.resources.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\it\System.Windows.Interactivity.resources.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\ja\System.Windows.Interactivity.resources.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\ko\System.Windows.Interactivity.resources.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\ru\System.Windows.Interactivity.resources.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\zh-Hans\System.Windows.Interactivity.resources.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\Bin\Release\zh-Hant\System.Windows.Interactivity.resources.dll
+D:\Projects\Github\tootfm\Posmotrim.TootFM.Common\obj\Release\Posmotrim.TootFM.Common.csprojResolveAssemblyReference.cache

@@ -40,11 +40,41 @@ namespace Posmotrim.TootFM.App.ViewModel
             _serviceClient = () => serviceClient;
             _settingsStore = settingsStore;
             MapCommand = new RelayCommand(() => { MapCenter = this._locationService.TryToGetCurrentLocation(); });
-
+            SearchCommand = new RelayCommand(Search);
 
         }
 
+        public bool IsBarVisible
+        {
+            get { return !_isSearchPopupOpen; }
 
+            set
+            {
+                if (_isSearchPopupOpen != value)
+                {
+                    _isSearchPopupOpen = !value;
+
+                    RaisePropertyChanged("IsBarVisible");
+                    RaisePropertyChanged("IsLoginPopupOpen");
+                }
+            }
+        }
+
+        private bool _isSearchPopupOpen = false;
+        public bool IsSearchPopupOpen
+        {
+            get { return _isSearchPopupOpen; }
+
+            set
+            {
+                if (_isSearchPopupOpen != value)
+                {
+                    _isSearchPopupOpen = value;
+                    RaisePropertyChanged("IsBarVisible");
+                    RaisePropertyChanged("IsSearchPopupOpen");
+                }
+            }
+        }
         
         private List<MapLayer> _mapItemsControl = new List<MapLayer>();
         public List<MapLayer> MapItemsControl
@@ -75,6 +105,7 @@ namespace Posmotrim.TootFM.App.ViewModel
         }
 
         public RelayCommand MapCommand { get; set; }
+        public RelayCommand SearchCommand { get; set; }
         private GeoCoordinate _lastMapCenter;
         private GeoCoordinate _mapCenter = null;
         public GeoCoordinate MapCenter
@@ -122,6 +153,11 @@ namespace Posmotrim.TootFM.App.ViewModel
 
         }
 
+        private void Search()
+        {
+            IsSearchPopupOpen = true;
+            //Messenger.Default.Send(new Uri("/Views/SearchView.xaml", UriKind.Relative), "NavigationRequest");
+        }
 
 
         private int maxPoint = 20;
@@ -177,7 +213,7 @@ namespace Posmotrim.TootFM.App.ViewModel
             }
            
             MapItemsControl.AddRange(items);
-
+            Thread.Sleep(1000);
             Messenger.Default.Send(items, "MapUpdate");
 
             IsSync = false;
@@ -209,6 +245,7 @@ namespace Posmotrim.TootFM.App.ViewModel
 
         public void Load()
         {
+            IsSearchPopupOpen = false;
             _mapItemsControl  = new List<MapLayer>();
             _mapCenter = null;
         }

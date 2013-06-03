@@ -106,7 +106,7 @@ namespace Posmotrim.TootFM.PhoneServices.Services.TootFMService
                         track.Audio = this.GetTrackDeezer(track.DeezerId).ObserveOnDispatcher().FirstOrDefault();
                         
                     }
-                    return arg.Current;
+                    return arg.Current.Where(t => !string.IsNullOrEmpty(t.Audio.Preview)).ToList();
                 }
 
                 if (arg.General != null && arg.General.Any())
@@ -116,7 +116,7 @@ namespace Posmotrim.TootFM.PhoneServices.Services.TootFMService
                         track.Audio = this.GetTrackDeezer(track.DeezerId).ObserveOnDispatcher().FirstOrDefault();
                     }
                    
-                    return arg.General;
+                    return arg.General.Where(t=>!string.IsNullOrEmpty(t.Audio.Preview)).ToList();
                 }
 
             }
@@ -131,17 +131,22 @@ namespace Posmotrim.TootFM.PhoneServices.Services.TootFMService
                 var surveysPath = string.Format(CultureInfo.InvariantCulture, "venues.json?q={0}", search);
                 uri = new Uri(serviceUri, surveysPath);
 
+                return
+                httpClient
+                    .GetJson<Venues>(new HttpWebRequestAdapter(uri)).Select(s => s == null ? null : s.Items).Select(MergeVenue);
             }
             if (geo != null)
             {
                 var surveysPath = string.Format(CultureInfo.InvariantCulture, "venues/nearby.json?lat={0}&lng={1}", geo.Latitude, geo.Longitude);
                 uri = new Uri(serviceUri, surveysPath);
+                
+                return
+                httpClient
+                    .GetJson<IEnumerable<Venue>>(new HttpWebRequestAdapter(uri)).Select(MergeVenue);
             }
 
 
-            return
-                httpClient
-                    .GetJson<IEnumerable<Venue>>(new HttpWebRequestAdapter(uri)).Select(MergeVenue);
+            return Observable.Return(new List<Venue>());
         }
 
         private IEnumerable<Venue> MergeVenue(IEnumerable<Venue> arg)
