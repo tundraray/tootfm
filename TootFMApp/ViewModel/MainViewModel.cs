@@ -11,6 +11,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Xml;
+using FlurryWP8SDK;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -86,6 +87,9 @@ namespace Posmotrim.TootFM.App.ViewModel
 
         private void SettingsStoreUserChanged(object sender, EventArgs e)
         {
+            
+            
+            FlurryWP8SDK.Api.SetUserId(_settingsStore.FoursquareToken);
             IsLoginPopupOpen = !SettingAreConfigured;
             if (SettingAreConfigured)
                 Refresh();
@@ -279,6 +283,7 @@ namespace Posmotrim.TootFM.App.ViewModel
             var checkin = _serviceClient().GetLastCheckin().Catch(
                 (Exception exception) =>
                 {
+                    Api.LogError("GetLastCheckin", exception);
                     if (exception is WebException)
                     {
                         var webException = exception as WebException;
@@ -302,6 +307,17 @@ namespace Posmotrim.TootFM.App.ViewModel
 
         private void BindingCheckin(Venue checkin)
         {
+            try
+            {
+                var loc = _locationService.TryToGetCurrentLocation();
+                Api.SetLocation(loc.Latitude, loc.Longitude, (float)loc.HorizontalAccuracy);
+            }
+            catch (Exception ex)
+            {
+
+                Api.LogError("SetLocation",ex);
+            }
+          
             if (checkin != null)
             {
                 CurrentLocationName = checkin.Name;
@@ -317,6 +333,7 @@ namespace Posmotrim.TootFM.App.ViewModel
             _serviceClient().GetCurrentPlaylist(obj).Catch(
               (Exception exception) =>
               {
+                  Api.LogError("GetCurrentPlaylist", exception);
                   if (exception is WebException)
                   {
                       var webException = exception as WebException;
@@ -335,6 +352,7 @@ namespace Posmotrim.TootFM.App.ViewModel
             _serviceClient().GetGeneralPlaylist(obj).Catch(
               (Exception exception) =>
               {
+                  Api.LogError("GetGeneralPlaylist", exception);
                   if (exception is WebException)
                   {
                       var webException = exception as WebException;
@@ -446,9 +464,9 @@ namespace Posmotrim.TootFM.App.ViewModel
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    
+                    Api.LogError("Player",  ex);
                     
                 }
                 

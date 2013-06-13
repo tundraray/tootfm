@@ -61,12 +61,16 @@ namespace Posmotrim.TootFM.App
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            FlurryWP8SDK.Api.StartSession(AppSettings.FlurryApiKey);
+
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            FlurryWP8SDK.Api.StartSession(AppSettings.FlurryApiKey);
+
         }
 
         // Code to execute when the application is deactivated (sent to background)
@@ -84,6 +88,7 @@ namespace Posmotrim.TootFM.App
         // Code to execute if a navigation fails
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
+            FlurryWP8SDK.Api.LogError("NavigationFailed", e.Exception);
             if (Debugger.IsAttached)
             {
                 // A navigation has failed; break into the debugger
@@ -94,6 +99,7 @@ namespace Posmotrim.TootFM.App
         // Code to execute on Unhandled Exceptions
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
+            FlurryWP8SDK.Api.LogError("UnhandledException", e.ExceptionObject);
             if (Debugger.IsAttached)
             {
                 // An unhandled exception has occurred; break into the debugger

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
+using FlurryWP8SDK;
+using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Phone.BackgroundAudio;
@@ -196,6 +199,10 @@ namespace Posmotrim.TootFM.App.ViewModel
            
             if (BackgroundAudioPlayer.Instance.Track != null)
             {
+                Api.LogEvent("Play", new List<Parameter>() { 
+                    new Parameter("Artist", BackgroundAudioPlayer.Instance.Track.Artist),
+                    new Parameter("Title", BackgroundAudioPlayer.Instance.Track.Title)});
+
                 ArtistName = BackgroundAudioPlayer.Instance.Track.Artist;
                 TrackName = BackgroundAudioPlayer.Instance.Track.Title;
                 Picture = BackgroundAudioPlayer.Instance.Track.AlbumArt;
